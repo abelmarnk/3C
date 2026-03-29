@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <string_view>
 
 namespace fe {
 
@@ -19,7 +20,7 @@ enum Law : int {
   LAW_COUNT = 11
 };
 
-inline constexpr std::array<const char *, LAW_COUNT> LAW_NAMES = {
+inline constexpr std::array<std::string_view, LAW_COUNT> LAW_NAMES = {
     "IDENTITY_OR",          "IDENTITY_AND",
     "IDEMPOTENT_OR",        "IDEMPOTENT_AND",
     "COMMUTATIVE_NEGATION", "ASSOCIATIVE_DISTRIBUTIVE_DEMORGAN_DOUBLE_NEGATION",

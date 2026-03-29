@@ -54,7 +54,7 @@ bool brute_force_of_size(int proof_sequence_length, int target,
   const int last_law = LAW_COUNT - 1;
 
   const int last_index_in_formula =
-      static_cast<int>(formula.size()) - 2; // stop excluded
+      max_formula_length - 2; // cover the full padded search capacity
 
   const auto max_law_at = [&](const int step_index) {
     if (step_index == proof_sequence_length - 1) {
@@ -214,7 +214,8 @@ bool brute_force_reduce_of_size(int proof_sequence_length, int reduction_steps,
 
   const int last_law = LAW_COUNT - 1;
 
-  const int last_index_in_formula = static_cast<int>(formula.size()) - 2;
+  const int last_index_in_formula =
+      max_formula_length - 2; // cover the full padded search capacity
 
   const auto max_law_at = [&](const int step_index) {
     if (step_index == proof_sequence_length - 1) {

@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <climits>
+#include <memory>
 #include <random>
 
 #include "formula_enumerator/laws.hpp"
@@ -609,10 +610,10 @@ bool is_negation(Formula& f, const int max_length, const int s) {
  *    This expansion is guarded by `ensure_capacity`.
  */
 bool is_substitution(Formula& f, const int max_length, const int s, VariableMap& variables_in_use) {
-    SubExpression* sub_expression = nullptr;
+    std::unique_ptr<SubExpression> sub_expression;
     auto it = variables_in_use.find(f[s]);
     if (it != variables_in_use.end()) {
-        sub_expression = &it->second;
+        sub_expression = std::make_unique<SubExpression>(it->second);
     }
 
     if (static_cast<int>(f.size()) > s + 2 && f[s] == NOT && is_boolean(f[s + 1])) {

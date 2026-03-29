@@ -28,6 +28,7 @@ void fill_before_stop(Formula &formula, int n, int element) {
 
 /*
  * Count distinct variable tokens present in the formula up to `formula_stop`.
+ * Returns -1 if the variable labels are not contiguous from x0 upward.
  */
 int count_variables(const Formula &formula, const int formula_stop) {
 
@@ -47,6 +48,13 @@ int count_variables(const Formula &formula, const int formula_stop) {
         variable_checklist[variable] = true;
         ++variable_count;
       }
+    }
+  }
+
+  for (int variable = 0; variable < variable_count; ++variable) {
+    if (variable >= static_cast<int>(variable_checklist.size()) ||
+        !variable_checklist[variable]) {
+      return -1;
     }
   }
 
@@ -121,4 +129,4 @@ std::string format_formula(const Formula &formula, int formula_stop) {
   return out.str();
 }
 
-}
+} // namespace fe
